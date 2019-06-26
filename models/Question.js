@@ -11,7 +11,8 @@ const questionSchema = new mongoose.Schema({
     },
     appID: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     answer: {
         type: String,
