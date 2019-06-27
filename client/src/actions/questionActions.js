@@ -1,5 +1,5 @@
 import question from '../apis/questions';
-import { ADD_QUESTION } from './types';
+import { ADD_QUESTION, FETCH_QUESTIONS } from './types';
 
 export const addQuestion = formVals => async dispatch => {
     const { questionID, questionPoints, questionTitle } = formVals;
@@ -10,11 +10,27 @@ export const addQuestion = formVals => async dispatch => {
         answer: null
     };
 
-    const response = await question.post('/', newQuestion);
+    try {
+        const response = await question.post('/', newQuestion);
 
-    dispatch({
-        type: ADD_QUESTION,
-        payload: response.data
-    });
+        dispatch({
+            type: ADD_QUESTION,
+            payload: response.data
+        });
+    } catch (e) {
+        throw e;
+    }
+};
 
+export const fetchQuestions = () => async dispatch => {
+    try {
+        const response = await question.get('/');
+
+        dispatch({
+            type: FETCH_QUESTIONS,
+            payload: response.data
+        });
+    } catch (e) {
+        throw e;
+    }
 };

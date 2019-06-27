@@ -1,1 +1,2 @@
 export const ADD_QUESTION = 'ADD_QUESTION';
+export const FETCH_QUESTIONS = 'FETCH_QUESTIONS';
