@@ -2,10 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 const bodyParser = require('body-parser');
+var cors = require('cors');
 const app = express();
 
 // App config
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
 // parse application/json
 app.use(bodyParser.json());
 

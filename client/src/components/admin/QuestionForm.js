@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import {
-    Button,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Row,
-    Col
-} from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 
 class QuestionForm extends Component {
     renderInput = ({ input, label, meta, type }) => {
@@ -28,7 +20,7 @@ class QuestionForm extends Component {
         );
     };
 
-    handleSubmit = formVals => {
+    onSubmit = formVals => {
         this.props.onSubmit(formVals);
     };
 
@@ -37,11 +29,7 @@ class QuestionForm extends Component {
             <Row className='d-flex justify-content-center'>
                 <Col md='6'>
                     <div className='mt-5 mb-5 shadow p-4'>
-                        <Form
-                            onSubmit={this.props.handleSubmit(
-                                this.handleSubmit
-                            )}
-                        >
+                        <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                             <Field
                                 label='Question content'
                                 name='questionTitle'
@@ -77,6 +65,5 @@ class QuestionForm extends Component {
 }
 
 export default reduxForm({
-    form: 'itemForm'
+    form: 'questionForm'
 })(QuestionForm);
-

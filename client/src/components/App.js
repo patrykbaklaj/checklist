@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import QuestionForm from './admin/QuestionForm';
+import QuestionAdd from './admin/QuestionAdd';
 
 class App extends Component {
     render() {
         return (
             <div>
                 <h1>Hello from App</h1>
-                <QuestionForm />
+                <QuestionAdd />
             </div>
         );
     }
