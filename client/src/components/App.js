@@ -3,6 +3,8 @@ import { Router, Route } from 'react-router-dom';
 import history from '../history';
 import QuestionAdd from './admin/QuestionAdd';
 import QuestionList from './admin/QuestionList';
+import CategoryList from './admin/CategoryList';
+import CategoryEdit from './admin/CategoryEdit';
 
 class App extends Component {
     render() {
@@ -18,6 +20,14 @@ class App extends Component {
                     <Route
                         path='/admin/questions/add'
                         component={QuestionAdd}
+                    />
+                    <Route
+                        path='/admin/categories/list'
+                        component={CategoryList}
+                    />
+                    <Route
+                        path='/admin/category/:id'
+                        component={CategoryEdit}
                     />
                 </div>
             </Router>
