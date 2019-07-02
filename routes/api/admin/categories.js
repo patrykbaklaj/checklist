@@ -19,7 +19,6 @@ router.get('/', (req, res) => {
 // @ POST /api/admin/category
 // Add new category
 router.post('/', (req, res) => {
-    console.log(req.body);
     const { name, appID, questions } = req.body;
 
     const newCategory = new Category({ name, appID, questions });
@@ -46,15 +45,25 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// POST api/admin/category/:id
-// DELETE question
-// router.delete('/:id', (req, res) => {
-//     const { id } = req.params;
-//     Question.findOneAndDelete({ _id: id }, (err, foundQuestion) => {
-//         if (err) throw err;
-//         console.log(foundQuestion);
-//         res.status(200).send(foundQuestion);
-//     });
-// });
+// PATCH api/admin/category/:id
+// Update existing category
+router.patch('/:id', (req, res) => {
+    const { name, appID, questions, id } = req.body;
+
+    const updatedCategory = { name, appID, questions, id };
+
+    Category.findOneAndUpdate(
+        { _id: id },
+        updatedCategory,
+        { new: true },
+        (err, category) => {
+            if (!err) {
+                res.status(200).send(category);
+            } else {
+                res.status(400).send(err);
+            }
+        }
+    );
+});
 
 module.exports = router;

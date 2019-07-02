@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
 import { fetchCategory } from '../../actions/categoriesAction';
-import { addCategory } from '../../actions/categoriesAction';
+import { editCategory } from '../../actions/categoriesAction';
 
 import CategoryForm from './CategoryForm';
 
@@ -25,7 +25,7 @@ class CategoryEdit extends Component {
 
     onSubmit = formVals => {
         // console.log(formVals);
-        this.props.addCategory(formVals);
+        this.props.editCategory({...formVals, id: this.props.match.params.id});
     };
 
     render() {
@@ -57,5 +57,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchCategory, addCategory }
+    { fetchCategory, editCategory }
 )(CategoryEdit);

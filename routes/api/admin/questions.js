@@ -10,7 +10,6 @@ router.get('/', (req, res) => {
     Question.find({}, (err, foundQuestions) => {
         if (err) throw err;
 
-        foundQuestions.forEach(question => console.log(question));
         res.status(200).send(foundQuestions);
     });
 });
@@ -36,7 +35,6 @@ router.delete('/:id', (req, res) => {
     const { id } = req.params;
     Question.findOneAndDelete({_id: id}, (err, foundQuestion) => {
         if(err) throw err;
-            console.log(foundQuestion);
             res.status(200).send(foundQuestion);
     });
 });

@@ -16,10 +16,16 @@ app.use(bodyParser.json());
 const db = config.get('mongoURI');
 
 // connect to mongoDB
-mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true }, err => {
-    if (err) throw err;
-    console.log('Successfuly connected to mongoDB :)');
-});
+mongoose.connect(
+    db,
+    { useNewUrlParser: true, useCreateIndex: true },
+    err => {
+        if (err) throw err;
+        console.log('Successfuly connected to mongoDB :)');
+    }
+);
+mongoose.set('useFindAndModify', false);
+
 
 // Use routes
 app.use('/api/admin/questions', require('./routes/api/admin/questions'));
