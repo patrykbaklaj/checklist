@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { FormGroup, Label, Input, Button, Row, Col, Form } from 'reactstrap';
-import { fetchQuestions } from '../../actions/questionActions';
+// import { fetchQuestions } from '../../actions/questionActions';
 
 class CategoryForm extends Component {
-    componentDidMount() {
-        this.props.fetchQuestions();
-    }
-
     renderInput = ({ input, label, meta, type }) => {
         return (
             <FormGroup className='mb-4'>
@@ -26,43 +22,47 @@ class CategoryForm extends Component {
     };
 
     renderCurrentQuestions = ({ input, label, meta }) => {
-        return this.props.selectedCategory.questions.map(question => {
-            return (
-                <FormGroup check key={question._id}>
-                    <Label check>
-                        {/* <Input type='checkbox' {...input} />
+        if (this.props.selectedCategory) {
+            return this.props.selectedCategory.questions.map(question => {
+                return (
+                    <FormGroup check key={question._id}>
+                        <Label check>
+                            {/* <Input type='checkbox' {...input} />
                         {question._id}: <strong>{question.name}</strong> */}
-                        <Field
-                            name={`qid-${question._id}`}
-                            id={question._id}
-                            component='input'
-                            type='checkbox'
-                        />
-                        {question._id}: <strong>{question.name}</strong>
-                    </Label>
-                </FormGroup>
-            );
-        });
+                            <Field
+                                name={`qid-${question._id}`}
+                                id={question._id}
+                                component='input'
+                                type='checkbox'
+                            />
+                            {question._id}: <strong>{question.name}</strong>
+                        </Label>
+                    </FormGroup>
+                );
+            });
+        } else return <div />;
     };
 
-    renderAllQuestions = ({ input, label, meta }) => {
-        return this.props.questions.map(question => {
-            return (
-                <FormGroup check key={question._id}>
-                    <Label check>
-                        {/* <Input type='checkbox' {...input} />
-                        {question._id}: <strong>{question.name}</strong> */}
-                        <Field
-                            name={`qid-${question._id}`}
-                             id={question._id}
-                            component='input'
-                            type='checkbox'
-                        />
-                        {question._id}: <strong>{question.name}</strong>
-                    </Label>
-                </FormGroup>
-            );
-        });
+    renderAllQuestions = () => {
+        if (this.props.questions.length !== 0) {
+            return this.props.questions.map(question => {
+                return (
+                    <FormGroup check key={question._id}>
+                        <Label check>
+                            <Field
+                                name={`qid-${question._id}`}
+                                id={question._id}
+                                component='input'
+                                type='checkbox'
+                            />
+                            {question._id}: <strong>{question.name}</strong>
+                        </Label>
+                    </FormGroup>
+                );
+            });
+        } else {
+            return <div>Loading</div>;
+        }
     };
 
     handleSubmit = formVals => {
@@ -70,10 +70,6 @@ class CategoryForm extends Component {
     };
 
     render() {
-        if (!this.props.selectedCategory || this.props.questions.length === 0) {
-            return <h6 className='mt-5 mb-5'> Loading...</h6>;
-        }
-
         return (
             <div>
                 <div className='mt-5 mb-5 shadow p-4'>
@@ -93,13 +89,11 @@ class CategoryForm extends Component {
                         <h5>Current questions</h5>
 
                         <Field
-                            // label='CurrentQuestions'
                             component={this.renderCurrentQuestions}
                             name='currentQuestions'
                         />
                         <h5 className='mt-4'>All Questions</h5>
                         <Field
-                            // label='Questions'
                             component={this.renderAllQuestions}
                             name='AllQuestions'
                         />
@@ -122,7 +116,4 @@ const mapStateToProps = state => {
 
 const formWrapped = reduxForm({ form: 'categoryForm' })(CategoryForm);
 
-export default connect(
-    mapStateToProps,
-    { fetchQuestions }
-)(formWrapped);
+export default connect(mapStateToProps)(formWrapped);

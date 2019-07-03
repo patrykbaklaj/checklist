@@ -5,6 +5,7 @@ import QuestionAdd from './admin/QuestionAdd';
 import QuestionList from './admin/QuestionList';
 import CategoryList from './admin/CategoryList';
 import CategoryEdit from './admin/CategoryEdit';
+import CategoryAdd from './admin/CategoryAdd';
 
 class App extends Component {
     render() {
@@ -28,6 +29,10 @@ class App extends Component {
                     <Route
                         path='/admin/category/:id'
                         component={CategoryEdit}
+                    />
+                    <Route
+                        path='/admin/categories/new'
+                        component={CategoryAdd}
                     />
                 </div>
             </Router>

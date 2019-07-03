@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
 import { fetchCategory } from '../../actions/categoriesAction';
+import { fetchQuestions } from '../../actions/questionActions';
 import { editCategory } from '../../actions/categoriesAction';
 
 import CategoryForm from './CategoryForm';
@@ -12,6 +13,7 @@ class CategoryEdit extends Component {
         const categoryId = this.props.match.params.id;
         // fetch category by selected id
         this.props.fetchCategory(categoryId);
+        this.props.fetchQuestions();
     }
 
     renderCategoryTitle = () => {
@@ -51,11 +53,12 @@ class CategoryEdit extends Component {
 
 const mapStateToProps = state => {
     return {
-        selectedCategory: state.category.selectedCategory
+        selectedCategory: state.category.selectedCategory,
+        questions: state.question.questions
     };
 };
 
 export default connect(
     mapStateToProps,
-    { fetchCategory, editCategory }
+    { fetchCategory, editCategory, fetchQuestions }
 )(CategoryEdit);
