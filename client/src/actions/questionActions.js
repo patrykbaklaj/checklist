@@ -1,5 +1,6 @@
 import question from '../apis/questions';
-import { ADD_QUESTION, FETCH_QUESTIONS } from './types';
+import history from '../history';
+import { ADD_QUESTION, FETCH_QUESTIONS, DELETE_QUESTION } from './types';
 
 export const addQuestion = formVals => async dispatch => {
     const { questionID, questionPoints, questionTitle } = formVals;
@@ -28,6 +29,21 @@ export const fetchQuestions = () => async dispatch => {
 
         dispatch({
             type: FETCH_QUESTIONS,
+            payload: response.data
+        });
+
+        history.push('/admin/questions/list');
+    } catch (e) {
+        throw e;
+    }
+};
+
+export const deleteQuestion = id => async dispatch => {
+    try {
+        const response = await question.delete(`/${id}`);
+
+        dispatch({
+            type: DELETE_QUESTION,
             payload: response.data
         });
     } catch (e) {

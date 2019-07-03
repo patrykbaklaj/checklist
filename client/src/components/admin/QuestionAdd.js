@@ -4,6 +4,7 @@ import { addQuestion } from '../../actions/questionActions';
 import QuestionForm from './QuestionForm';
 
 class QuestionAdd extends Component {
+    
     onSubmit = formVals => {
         this.props.addQuestion(formVals);
     };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchQuestions } from '../../actions/questionActions';
+import { fetchQuestions, deleteQuestion } from '../../actions/questionActions';
 import {
     Container,
     ListGroup,
@@ -9,7 +9,8 @@ import {
     ListGroupItemText,
     Row,
     Col,
-    Badge
+    Badge,
+    Button
 } from 'reactstrap';
 
 class QuestionList extends Component {
@@ -17,12 +18,16 @@ class QuestionList extends Component {
         this.props.fetchQuestions();
     }
 
+    handleDeleteClick = (e) => {
+        this.props.deleteQuestion(e.target.dataset.id);
+    }
+
     renderListGroupItem = () => {
         return this.props.questions.map(question => {
             return (
                 <ListGroupItem className='mb-2' key={question._id}>
                     <ListGroupItemHeading>{question.name}</ListGroupItemHeading>
-                    <ListGroupItemText>ID:  {question._id}</ListGroupItemText>
+                    <ListGroupItemText>ID: {question._id}</ListGroupItemText>
                     <Row>
                         <Col md='6'>App ID: {question.appID}</Col>
                         <Col
@@ -32,6 +37,18 @@ class QuestionList extends Component {
                             <p>
                                 Points: <Badge>{question.points}</Badge>
                             </p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Button outline color='warning' size='sm' block>
+                                Edit
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button outline color='danger' size='sm' block onClick={this.handleDeleteClick} data-id={question._id}>
+                                Delete
+                            </Button>
                         </Col>
                     </Row>
                 </ListGroupItem>
@@ -56,5 +73,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchQuestions }
+    { fetchQuestions, deleteQuestion }
 )(QuestionList);

@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 // Add new question
 router.post('/', (req, res) => {
     const { name, points, appID, answer } = req.body;
-    const newQuestion = new Question({name, points, appID, answer});
+    const newQuestion = new Question({ name, points, appID, answer });
 
     newQuestion.save((err, savedQuestion) => {
         if (!err) {
@@ -33,9 +33,9 @@ router.post('/', (req, res) => {
 // DELETE question
 router.delete('/:id', (req, res) => {
     const { id } = req.params;
-    Question.findOneAndDelete({_id: id}, (err, foundQuestion) => {
-        if(err) throw err;
-            res.status(200).send(foundQuestion);
+    Question.findOneAndDelete({ _id: id }, (err, foundQuestion) => {
+        if (err) throw err;
+        res.status(200).send(foundQuestion._id);
     });
 });
 
