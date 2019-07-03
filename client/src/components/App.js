@@ -19,7 +19,7 @@ class App extends Component {
                         component={QuestionList}
                     />
                     <Route
-                        path='/admin/questions/add'
+                        path='/admin/questions/new'
                         component={QuestionAdd}
                     />
                     <Route

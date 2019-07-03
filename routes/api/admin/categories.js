@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// PATCH api/admin/category/:id
+// @ PATCH api/admin/category/:id
 // Update existing category
 router.patch('/:id', (req, res) => {
     const { name, appID, questions, id } = req.body;
@@ -64,6 +64,23 @@ router.patch('/:id', (req, res) => {
             }
         }
     );
+});
+
+// @ DELETE api/admin/category/:id
+// Delete category with given id
+
+// TO DELETE
+// router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    Category.findOneAndDelete({ _id: id }, (err, foundCategory) => {
+        if (err) {
+            throw err;
+        } else {
+            res.status(200).send(foundCategory._id);
+        }
+    });
 });
 
 module.exports = router;

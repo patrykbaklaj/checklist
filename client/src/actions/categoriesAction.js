@@ -1,4 +1,10 @@
-import { FETCH_CATEGORIES, FETCH_CATEGORY, ADD_CATEGORY, EDIT_CATEGORY } from './types';
+import {
+    FETCH_CATEGORIES,
+    FETCH_CATEGORY,
+    ADD_CATEGORY,
+    EDIT_CATEGORY,
+    DELETE_CATEGORY
+} from './types';
 import categories from '../apis/categories';
 import history from '../history';
 
@@ -30,33 +36,51 @@ export const fetchCategory = id => async dispatch => {
 
 export const addCategory = formVals => async dispatch => {
     const newCategory = parseCategory(formVals);
-    console.log(newCategory);
+    try {
+        const response = await categories.post('/', newCategory);
 
-    const response = await categories.post('/', newCategory);
+        dispatch({
+            type: ADD_CATEGORY,
+            payload: response.data
+        });
 
-    dispatch({
-        type: ADD_CATEGORY,
-        payload: response.data
-    });
-
-    history.push('/admin/categories/list');
+        history.push('/admin/categories/list');
+    } catch (e) {
+        throw e;
+    }
 };
 
-
-// TODO EDIT CATEGORY ACTION
 export const editCategory = formVals => async dispatch => {
     const newCategory = parseCategory(formVals);
+    try {
+        const response = await categories.patch(`/${formVals.id}`, newCategory);
 
-    const response = await categories.patch(`/${formVals.id}`, newCategory);
+        dispatch({
+            type: EDIT_CATEGORY,
+            payload: response.data
+        });
 
-    dispatch({
-        type: EDIT_CATEGORY,
-        payload: response.data
-    });
-
-    history.push('/admin/categories/list');
+        history.push('/admin/categories/list');
+    } catch (e) {
+        throw e;
+    }
 };
 
+// DELETE CATEGORY
+export const deleteCategory = id => async dispatch => {
+    try {
+        const response = await categories.delete(`/${id}`);
+
+        dispatch({
+            type: DELETE_CATEGORY,
+            // id to return from server
+            payload: response.data
+        });
+        history.push('/admin/categories/list');
+    } catch (e) {
+        throw e;
+    }
+};
 
 // helper function to construct new category from Form Values
 // Used in addCategory and editCategory

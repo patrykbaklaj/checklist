@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import history from '../../history';
 import { connect } from 'react-redux';
-import { fetchCategories } from '../../actions/categoriesAction';
+import { fetchCategories, deleteCategory } from '../../actions/categoriesAction';
 import {
     Container,
     ListGroup,
@@ -15,11 +15,14 @@ import {
 } from 'reactstrap';
 
 class QuestionList extends Component {
-    
     onDeleteClick = () => {};
-    
-    onEditClick = (e) => {
+
+    onEditClick = e => {
         history.push(`/admin/category/${e.target.dataset.id}`);
+    };
+
+    onDeleteClick = e => {
+        this.props.deleteCategory(e.target.dataset.id);
     };
 
     componentDidMount() {
@@ -54,6 +57,7 @@ class QuestionList extends Component {
                                     size='sm'
                                     color='danger'
                                     data-id={category._id}
+                                    onClick={this.onDeleteClick}
                                 >
                                     Delete
                                 </Button>
@@ -82,5 +86,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchCategories }
+    { fetchCategories, deleteCategory }
 )(QuestionList);
