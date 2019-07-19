@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import history from '../../history';
 import { connect } from 'react-redux';
-import { fetchCategories, deleteCategory } from '../../actions/categoriesAction';
+import {
+    fetchCategories,
+    deleteCategory
+} from '../../actions/categoriesAction';
 import {
     Container,
     ListGroup,
@@ -73,6 +77,16 @@ class QuestionList extends Component {
         return (
             <Container className='mt-5 mb-4'>
                 <ListGroup>{this.renderListGroupItem()}</ListGroup>
+                <Button
+                    size='sm'
+                    block
+                    color='success'
+                    className='mt-3'
+                    tag={Link}
+                    to='/admin/categories/new'
+                >
+                    Add new category
+                </Button>
             </Container>
         );
     }

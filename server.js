@@ -30,6 +30,7 @@ mongoose.set('useFindAndModify', false);
 // Use routes
 app.use('/api/admin/questions', require('./routes/api/admin/questions'));
 app.use('/api/admin/categories', require('./routes/api/admin/categories'));
+app.use('/api/admin/stores', require('./routes/api/admin/stores'));
 
 // Set port
 const port = process.env.port || 5001;

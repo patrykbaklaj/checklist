@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuestions, deleteQuestion } from '../../actions/questionActions';
 import {
@@ -18,9 +19,9 @@ class QuestionList extends Component {
         this.props.fetchQuestions();
     }
 
-    handleDeleteClick = (e) => {
+    handleDeleteClick = e => {
         this.props.deleteQuestion(e.target.dataset.id);
-    }
+    };
 
     renderListGroupItem = () => {
         return this.props.questions.map(question => {
@@ -46,7 +47,14 @@ class QuestionList extends Component {
                             </Button>
                         </Col>
                         <Col>
-                            <Button outline color='danger' size='sm' block onClick={this.handleDeleteClick} data-id={question._id}>
+                            <Button
+                                outline
+                                color='danger'
+                                size='sm'
+                                block
+                                onClick={this.handleDeleteClick}
+                                data-id={question._id}
+                            >
                                 Delete
                             </Button>
                         </Col>
@@ -60,6 +68,16 @@ class QuestionList extends Component {
         return (
             <Container className='mt-5 mb-4'>
                 <ListGroup>{this.renderListGroupItem()}</ListGroup>
+                <Button
+                    size='sm'
+                    block
+                    color='success'
+                    className='mt-3'
+                    tag={Link}
+                    to='/admin/questions/new'
+                >
+                    Add new question
+                </Button>
             </Container>
         );
     }
