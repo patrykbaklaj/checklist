@@ -5,14 +5,12 @@ import {
 	Label,
 	Input,
 	Button,
-	Row,
-	Col,
 	Form,
 	Alert,
 	Container
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { fetchStores } from '../../actions/storesAction';
+import { fetchStores, selectStore } from '../../actions/storesAction';
 
 class NewAudit extends Component {
 	componentDidMount() {
@@ -22,7 +20,11 @@ class NewAudit extends Component {
 	renderOptions = () => {
 		if (this.props.stores.length !== 0) {
 			return this.props.stores.map(store => {
-				return <option key={store._id}>{store.number} - {store.city} {store.address}</option>;
+				return (
+					<option key={store._id} value={store._id}>
+						{store.number} - {store.city} {store.address}
+					</option>
+				);
 			});
 		} else {
 			return <option>Loading...</option>;
@@ -37,15 +39,19 @@ class NewAudit extends Component {
 				</Label>
 				<Input
 					{...input}
-                    id={input.name}
-                    type={type}
+					id={input.name}
+					type={type}
 					// placeholder={`Enter ${label}`}
 				>
-                    <option >Wybierz sklep</option>
+					<option value='null'>Wybierz sklep</option>
 					{this.renderOptions()}
 				</Input>
 			</FormGroup>
 		);
+	};
+
+	onSubmit = selectedStore => {
+		this.props.selectStore(selectedStore);
 	};
 
 	render() {
@@ -55,13 +61,21 @@ class NewAudit extends Component {
 					<h1>New Audit</h1>
 					<Alert color='primary'>Wybierz sklep</Alert>
 					<div className='mb-5 shadow p-4'>
-						<Form>
+						<Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
 							<Field
 								component={this.renderSelect}
 								name='storeSelect'
-                                type='select'
-                                label="Wybierz sklep"
+								type='select'
+								label='Wybierz sklep'
 							/>
+							<Button
+								color='dark'
+								block
+								size='sm'
+								className='mt-4'
+							>
+								Start new audit
+							</Button>
 						</Form>
 					</div>
 				</Container>
@@ -80,5 +94,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ fetchStores }
+	{ fetchStores, selectStore }
 )(formWrapped);

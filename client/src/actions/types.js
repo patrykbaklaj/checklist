@@ -10,3 +10,4 @@ export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 // stores actions
 export const FETCH_STORES = 'FETCH_STORES';
+export const SELECT_STORE = 'SELECT_STORE';
