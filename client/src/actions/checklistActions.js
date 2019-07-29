@@ -9,6 +9,7 @@ export const fetchChecklists = () => async dispatch => {
 			type: FETCH_CHECKLISTS,
 			payload: response.data
 		});
-		console.log(response);
-	} catch (error) {}
+	} catch (error) {
+		throw error;
+	}
 };

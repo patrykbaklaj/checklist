@@ -14,4 +14,4 @@ export const FETCH_STORES = 'FETCH_STORES';
 export const FETCH_CHECKLISTS = 'FETCH_CHECKLISTS';
 // audit actions
 export const START_AUDIT = 'START_AUDIT';
-
+export const FETCH_CHECKLIST = 'FETCH_CHECKLIST';

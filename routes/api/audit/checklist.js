@@ -18,15 +18,16 @@ router.get('/', (req, res) => {
 
 // To Populate
 
-// router.get('/', (req, res) => {
-// 	Checklist.find({})
-// 		.populate('categories') // sort by store number
-// 		.exec((err, foundChecklist) => {
-// 			if (err) throw err;
+router.get('/:id', (req, res) => {
+	const id = req.params.id;
+	Checklist.findById(id)
+		.populate('categories')
+		.exec((err, foundChecklist) => {
+			if (err) throw err;
 
-// 			res.status(200).send(foundChecklist);
-// 		});
-// });
+			res.status(200).send(foundChecklist);
+		});
+});
 
 // ----------------------------------------- TO CHANGE -----------------------------
 // @ POST /api/admin/checklist

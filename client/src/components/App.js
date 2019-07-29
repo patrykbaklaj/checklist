@@ -9,6 +9,7 @@ import CategoryEdit from './admin/CategoryEdit';
 import CategoryAdd from './admin/CategoryAdd';
 import Home from './Home';
 import NewAudit from './audit/NewAudit';
+import MainAudit from './audit/MainAudit';
 
 class App extends Component {
 	render() {
@@ -44,6 +45,7 @@ class App extends Component {
 						component={CategoryAdd}
 					/>
 					<Route exact path='/audit/new-audit' component={NewAudit} />
+					<Route exact path='/audit/process' component={MainAudit} />
 				</div>
 			</Router>
 		);
