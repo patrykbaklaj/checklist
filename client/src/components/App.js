@@ -43,11 +43,7 @@ class App extends Component {
 						path='/admin/categories/new'
 						component={CategoryAdd}
 					/>
-                    <Route 
-                        path="/audit/new-audit"
-                        component={NewAudit}
-                    />
-
+					<Route exact path='/audit/new-audit' component={NewAudit} />
 				</div>
 			</Router>
 		);

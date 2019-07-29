@@ -22,6 +22,8 @@ class QuestionList extends Component {
     onDeleteClick = () => {};
 
     onEditClick = e => {
+        
+        console.log(`/admin/category/${e.target.dataset.id}`);
         history.push(`/admin/category/${e.target.dataset.id}`);
     };
 

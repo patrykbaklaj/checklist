@@ -8,8 +8,7 @@ const categoySchema = new mongoose.Schema({
     },
     appID: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }]
 });

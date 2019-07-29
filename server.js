@@ -31,6 +31,7 @@ mongoose.set('useFindAndModify', false);
 app.use('/api/admin/questions', require('./routes/api/admin/questions'));
 app.use('/api/admin/categories', require('./routes/api/admin/categories'));
 app.use('/api/stores', require('./routes/api/audit/stores'));
+app.use('/api/checklist', require('./routes/api/audit/checklist'));
 
 // Set port
 const port = process.env.port || 5001;

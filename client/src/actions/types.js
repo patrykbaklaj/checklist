@@ -10,4 +10,8 @@ export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 // stores actions
 export const FETCH_STORES = 'FETCH_STORES';
-export const SELECT_STORE = 'SELECT_STORE';
+// checklist actions
+export const FETCH_CHECKLISTS = 'FETCH_CHECKLISTS';
+// audit actions
+export const START_AUDIT = 'START_AUDIT';
+
